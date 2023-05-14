@@ -1,0 +1,22 @@
+{
+	"emoji_id": "1107362608606093334",
+	"target_id": "564760739647193088",
+	"default_chance": 0.16,
+	"chances": [
+		{ "word": "NO", "chance": 1.00, "case_sensitive": true },
+		{ "word": "catboy", "chance": 0.75, "case_sensitive": false },
+		{ "word": "submissive", "chance": 0.75, "case_sensitive": false },
+		{ "word": "cute", "chance": 0.75, "case_sensitive": false },
+		{ "word": "headpat", "chance": 1.00, "case_sensitive": false },
+		
+		{ "word": "!!", "chance": 1.00, "case_sensitive": false },
+		{ "word": "!", "chance": 0.50, "case_sensitive": false },
+
+		{ "word": "1107387668901417071", "chance": 1.00, "case_sensitive": false, "_comment": "flushed" },
+		{ "word": "1107387608113369219", "chance": 1.00, "case_sensitive": false, "_comment": "angry" },
+		{ "word": "1107384372878901330", "chance": 1.00, "case_sensitive": false, "_comment": "auxi_blush" },
+		{ "word": "1107399705081680013", "chance": 1.00, "case_sensitive": false, "_comment": "uwu" },
+		
+		{ "word": "1107352585184223343", "chance": 1.00, "case_sensitive": false, "_comment": "@AuxiPatter"}
+	]
+}
