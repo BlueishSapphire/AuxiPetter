@@ -94,7 +94,7 @@ function reload_config() {
 
 	for (const { emoji_name, chance, word, case_sensitive } of reactions) {
 		try {
-			reaction_results.append(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
+			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
 			console.error("[config.js]", error);
 		}
@@ -104,7 +104,7 @@ function reload_config() {
 
 	for (const { chance, word, message, case_sensitive } of Object.entries(responses)) {
 		try {
-			response_results.append(load_config_response(chance, word, message, case_sensitive));
+			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
 			console.error("[config.js]", error);
 		}
