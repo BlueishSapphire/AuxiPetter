@@ -49,7 +49,7 @@ function load_config_response(chance, word, message, case_sensitive) {
 function reload_config() {
 	console.info("Loading ./config.json");
 
-	const { target_id, emojis, reactions, responses } = require("./config.jsonc");
+	const { target_id, emojis, reactions, responses } = require("./config.json");
 
 	if (target_id === undefined) {
 		console.error("[config.js] Error: target_id should be defined");
