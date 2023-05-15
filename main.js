@@ -41,8 +41,11 @@ function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) 
 function load_config_response(chance, word, message, case_sensitive) {
 	case_sensitive ??= false;
 
+	if (chance === undefined) throw new Error(`[config.js] Error: chance should be defined`);
 	if (typeof(chance) !== "number") throw new Error(`[config.js] Error: chance should be a number`);
+	if (word === undefined) throw new Error(`[config.js] Error: word should be defined`);
 	if (typeof(word) !== "string") throw new Error(`[config.js] Error: word should be a string`);
+	if (message === undefined) throw new Error(`[config.js] Error: message should be defined`);
 	if (typeof(message) !== "string") throw new Error(`[config.js] Error: message should be a string`);
 	if (typeof(case_sensitive) != "boolean") throw new Error(`[config.js] Error: case_sensitive should be a boolean`);
 
