@@ -24,9 +24,12 @@ function timestamp(message) {
 function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) {
 	case_sensitive ??= false;
 
-	if (typeof(emoji_name) !== "string") throw new Error(`[config.js] Error: emoji should be a string`);
+	if (emoji_name === undefined) throw new Error(`[config.js] Error: emoji_name should be defined`);
+	if (typeof(emoji_name) !== "string") throw new Error(`[config.js] Error: emoji_name should be a string`);
 	if (emojis[emoji_name] === undefined) throw new Error(`[config.js] Error: could not find matching emoji entry for :${emoji_name}:`);
+	if (chance === undefined) throw new Error(`[config.js] Error: chance should be defined`);
 	if (typeof(chance) !== "number") throw new Error(`[config.js] Error: chance should be a number`);
+	if (word === undefined) throw new Error(`[config.js] Error: word should be defined`);
 	if (typeof(word) !== "string") throw new Error(`[config.js] Error: word should be a string`);
 	if (typeof(case_sensitive) != "boolean") throw new Error(`[config.js] Error: case_sensitive should be a boolean`);
 
