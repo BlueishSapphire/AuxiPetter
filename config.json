@@ -4,20 +4,21 @@
 		"auxi_pat": "1107362608606093334"
 	},
 	"reactions": [
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "NO", "case_sensitive": true },
-		{ "emoji": "auxi_pat", "chance": 0.75, "word": "catboy" },
-		{ "emoji": "auxi_pat", "chance": 0.75, "word": "submissive" },
-		{ "emoji": "auxi_pat", "chance": 0.75, "word": "cute" },
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "headpat" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "NO", "case_sensitive": true },
+		{ "chance": 0.75, "emoji": "auxi_pat", "word": "catboy" },
+		{ "chance": 0.75, "emoji": "auxi_pat", "word": "submissive" },
+		{ "chance": 0.75, "emoji": "auxi_pat", "word": "cute" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "headpat" },
 		
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "!!" },
-		{ "emoji": "auxi_pat", "chance": 0.50, "word": "!" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "!!" },
+		{ "chance": 0.50, "emoji": "auxi_pat", "word": "!" },
 
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "1107387668901417071", "_comment": "flushed" },
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "1107387608113369219", "_comment": "angry" },
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "1107384372878901330", "_comment": "auxi_blush" },
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "1107399705081680013", "_comment": "uwu" },
-
-		{ "emoji": "auxi_pat", "chance": 1.00, "word": "1107352585184223343", "_comment": "@AuxiPatter" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "1107387668901417071", "_comment": "flushed" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "1107387608113369219", "_comment": "angry" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "1107384372878901330", "_comment": "auxi_blush" },
+		{ "chance": 1.00, "emoji": "auxi_pat", "word": "1107399705081680013", "_comment": "uwu" },
+	],
+	"responses": [
+		{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:auxi_pat:1107362608606093334>", "_comment": "@AuxiPatter" }
 	]
 }

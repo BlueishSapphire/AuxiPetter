@@ -8,7 +8,7 @@ function timestamp(message) {
 	console.info(datestring, message);
 }
 
-function load_config_entry(emojis, emoji_name, chance, word, case_sensitive) {
+function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) {
 	case_sensitive ??= false;
 
 	if (typeof(emoji_name) !== "string") throw new Error(`[config.js] Error: emoji should be a string`);
@@ -22,10 +22,21 @@ function load_config_entry(emojis, emoji_name, chance, word, case_sensitive) {
 	return { emoji_id, chance, word, case_sensitive };
 }
 
+function load_config_response(chance, word, message, case_sensitive) {
+	case_sensitive ??= false;
+
+	if (typeof(chance) !== "number") throw new Error(`[config.js] Error: chance should be a number`);
+	if (typeof(word) !== "string") throw new Error(`[config.js] Error: word should be a string`);
+	if (typeof(message) !== "string") throw new Error(`[config.js] Error: message should be a string`);
+	if (typeof(case_sensitive) != "boolean") throw new Error(`[config.js] Error: case_sensitive should be a boolean`);
+
+	return { chance, word, message, case_sensitive };
+}
+
 function reload_config() {
 	console.info("Loading ./config.json");
 
-	const { target_id, emojis, reactions } = require("./config.jsonc");
+	const { target_id, emojis, reactions, responses } = require("./config.jsonc");
 
 	if (target_id === undefined) {
 		console.error("[config.js] Error: target_id should be defined");
@@ -45,11 +56,39 @@ function reload_config() {
 		emojis = [];
 	}
 
+	if (reactions === undefined) {
+		console.error("[config.js] Error: reactions should be defined");
+		emojis = [];
+	}
+	if (typeof(reactions) !== "object") {
+		console.error("[config.js] Error: reactions should be an array");
+		emojis = [];
+	}
+
+	if (responses === undefined) {
+		console.error("[config.js] Error: responses should be defined");
+		emojis = [];
+	}
+	if (typeof(responses) !== "object") {
+		console.error("[config.js] Error: responses should be an array");
+		emojis = [];
+	}
+
 	const reaction_results = [];
 
 	for (const { emoji_name, chance, word, case_sensitive } of Object.entries(reactions)) {
 		try {
-			reaction_results.append(load_config_entry(emojis, emoji_name, chance, word, case_sensitive));
+			reaction_results.append(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
+		} catch (error) {
+			console.error("[config.js]", error);
+		}
+	}
+
+	const response_results = [];
+
+	for (const { chance, word, message, case_sensitive } of Object.entries(responses)) {
+		try {
+			response_results.append(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
 			console.error("[config.js]", error);
 		}
@@ -57,7 +96,8 @@ function reload_config() {
 
 	global.config = {
 		target_id,
-		reactions: reaction_results
+		reactions: reaction_results,
+		responses: response_results,
 	};
 }
 
@@ -83,7 +123,7 @@ client.once(Events.ClientReady, c => {
 	timestamp(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on(Events.MessageCreate, msg => {
+client.on(Events.MessageCreate, async msg => {
 	const { target_id, reactions } = global.config;
 
 	if (msg.author.id !== target_id) return;
@@ -93,24 +133,38 @@ client.on(Events.MessageCreate, msg => {
 
 		if (case_sensitive) {
 			if (msg.content.includes(word) && Math.random() < chance) {
-				msg.react(emoji_id);
-				timestamp(`Reacted to ${msg.author.username}`);
-				return;
+				try {
+					await msg.react(emoji_id);
+					timestamp(`Reacted to ${msg.author.username}`);
+				} catch (error) {}
 			}
 		} else {
 			if (msg.content.toLowerCase().includes(word.toLowerCase()) && Math.random() < chance) {
-				msg.react(emoji_id);
-				timestamp(`Reacted to ${msg.author.username}`);
-				return;
+				try {
+					await msg.react(emoji_id);
+					timestamp(`Reacted to ${msg.author.username}`);
+				} catch (error) {}
 			}
 		}
 	}
 
-	// if (Math.random() < default_chance) {
-	// 	msg.react(emoji_id);
-	// 	timestamp(`Reacted to ${msg.author.username}`);
-	// 	return;
-	// }
+	for (const { word, chance, message, case_sensitive } of responses) {
+		if (chance <= 0) continue;
+
+		if (case_sensitive) {
+			if (msg.content.includes(word) && Math.random() < chance) {
+				await msg.reply(message);
+				timestamp(`Responded to ${msg.author.username}`);
+				return;
+			}
+		} else {
+			if (msg.content.toLowerCase().includes(word.toLowerCase()) && Math.random() < chance) {
+				await msg.reply(message);
+				timestamp(`Responded to ${msg.author.username}`);
+				return;
+			}
+		}
+	}
 });
 
 client.login(process.env.TOKEN);
