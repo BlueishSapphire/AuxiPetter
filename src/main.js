@@ -3,7 +3,7 @@ const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { timestamp } = require("./timestamp.js");
 const { reload_config } = require("./config_manager.js");
 
-fs.watchFile("./config.json", reload_config);
+fs.watchFile("../config.json", reload_config);
 reload_config();
 
 const client = new Client({
