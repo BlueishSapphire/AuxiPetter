@@ -2,7 +2,6 @@ const fs = require("fs");
 const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { timestamp } = require("./timestamp.js");
 const { reload_config } = require("./config_manager.js");
-require("dotenv").config();
 
 fs.watchFile("./config.json", reload_config);
 reload_config();
