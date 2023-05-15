@@ -105,7 +105,7 @@ function reload_config() {
 
 	const response_results = [];
 
-	for (const { chance, word, message, case_sensitive } of Object.entries(responses)) {
+	for (const { chance, word, message, case_sensitive } of responses) {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
