@@ -2,7 +2,7 @@ function pad_zeroes(number, length) {
 	return number.toString().padStart(length, "0");
 }
 
-export function timestamp(message) {
+function timestamp(message) {
 	const date = new Date();
 
 	const year = pad_zeroes(date.getFullYear(), 2);
