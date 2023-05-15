@@ -29,7 +29,7 @@ function load_config_response(chance, word, message, case_sensitive) {
 	return { chance, word, message, case_sensitive };
 }
 
-export function reload_config() {
+function reload_config() {
 	timestamp("Loading ./config.json");
 
 	const { target_id, emojis, reactions, responses } = require("./config.json");
@@ -96,3 +96,5 @@ export function reload_config() {
 		responses: response_results,
 	};
 }
+
+module.exports = { reload_config };

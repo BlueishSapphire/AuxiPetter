@@ -16,3 +16,5 @@ export function timestamp(message) {
 	const datestring = `[${year}-${month}-${day} ${hour}:${minute}:${second}]`;
 	console.info(datestring, message);
 }
+
+module.exports = { timestamp };
