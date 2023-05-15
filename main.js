@@ -53,43 +53,43 @@ function load_config_response(chance, word, message, case_sensitive) {
 }
 
 function reload_config() {
-	console.info("Loading ./config.json");
+	timestamp("Loading ./config.json");
 
 	const { target_id, emojis, reactions, responses } = require("./config.json");
 
 	if (target_id === undefined) {
-		console.error("[config.js] Error: target_id should be defined");
+		timestamp("[config.js] Error: target_id should be defined");
 		target_id = "";
 	}
 	if (typeof(target_id) !== "string") {
-		console.error("[config.js] Error: target_id should be a string");
+		timestamp("[config.js] Error: target_id should be a string");
 		target_id = "";
 	}
 
 	if (emojis === undefined) {
-		console.error("[config.js] Error: emojis should be defined");
+		timestamp("[config.js] Error: emojis should be defined");
 		emojis = [];
 	}
 	if (typeof(emojis) !== "object") {
-		console.error("[config.js] Error: emojis should be an array");
+		timestamp("[config.js] Error: emojis should be an array");
 		emojis = [];
 	}
 
 	if (reactions === undefined) {
-		console.error("[config.js] Error: reactions should be defined");
+		timestamp("[config.js] Error: reactions should be defined");
 		emojis = [];
 	}
 	if (typeof(reactions) !== "object") {
-		console.error("[config.js] Error: reactions should be an array");
+		timestamp("[config.js] Error: reactions should be an array");
 		emojis = [];
 	}
 
 	if (responses === undefined) {
-		console.error("[config.js] Error: responses should be defined");
+		timestamp("[config.js] Error: responses should be defined");
 		emojis = [];
 	}
 	if (typeof(responses) !== "object") {
-		console.error("[config.js] Error: responses should be an array");
+		timestamp("[config.js] Error: responses should be an array");
 		emojis = [];
 	}
 
@@ -99,7 +99,7 @@ function reload_config() {
 		try {
 			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
-			console.error("[config.js]", error);
+			timestamp("[config.js]", error);
 		}
 	}
 
@@ -109,7 +109,7 @@ function reload_config() {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
-			console.error("[config.js]", error);
+			timestamp("[config.js]", error);
 		}
 	}
 
