@@ -13,10 +13,10 @@
 		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "flushed" },
 		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "angry" },
 		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "auxi_blush" },
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "uwu" }
+		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "uwu" },
 		
 		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "!!" },
-		{ "chance": 0.50, "emoji_name": "auxi_pat", "word": "!" },
+		{ "chance": 0.50, "emoji_name": "auxi_pat", "word": "!" }
 	],
 	"responses": [
 		{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:auxi_pat:1107362608606093334>", "_comment": "@AuxiPatter" }
