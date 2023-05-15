@@ -34,20 +34,13 @@ client.on(Events.MessageCreate, async msg => {
 	for (const { word, chance, emoji_id, case_sensitive } of reactions) {
 		if (chance <= 0) continue;
 
-		if (case_sensitive) {
-			if (msg.content.includes(word) && Math.random() < chance) {
-				try {
-					await msg.react(emoji_id);
-					timestamp(`Reacted to ${msg.author.username}`);
-				} catch (error) {}
-			}
-		} else {
-			if (msg.content.toLowerCase().includes(word.toLowerCase()) && Math.random() < chance) {
-				try {
-					await msg.react(emoji_id);
-					timestamp(`Reacted to ${msg.author.username}`);
-				} catch (error) {}
-			}
+		const content = case_sensitive ? msg.content : msg.content.toLowerCase();
+
+		if (content.includes(case_sensitive ? word : word.toLowerCase()) && Math.random() < chance) {
+			try {
+				await msg.react(emoji_id);
+				timestamp(`Reacted to ${msg.author.username}`);
+			} catch (error) {}
 		}
 	}
 
