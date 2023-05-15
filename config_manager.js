@@ -1,3 +1,5 @@
+const { timestamp } = require("./timestamp.js");
+
 function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) {
 	case_sensitive ??= false;
 
