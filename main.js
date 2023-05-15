@@ -92,7 +92,7 @@ function reload_config() {
 
 	const reaction_results = [];
 
-	for (const { emoji_name, chance, word, case_sensitive } of Object.entries(reactions)) {
+	for (const { emoji_name, chance, word, case_sensitive } of reactions) {
 		try {
 			reaction_results.append(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
