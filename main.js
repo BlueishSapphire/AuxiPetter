@@ -26,7 +26,7 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on(Events.MessageCreate, async msg => {
-	const { target_id, reactions } = global.config;
+	const { target_id, reactions, responses } = global.config;
 
 	if (msg.author.id !== target_id) return;
 
