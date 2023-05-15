@@ -47,18 +47,13 @@ client.on(Events.MessageCreate, async msg => {
 	for (const { word, chance, message, case_sensitive } of responses) {
 		if (chance <= 0) continue;
 
-		if (case_sensitive) {
-			if (msg.content.includes(word) && Math.random() < chance) {
+		const content = case_sensitive ? msg.content : msg.content.toLowerCase();
+
+		if (content.includes(case_sensitive ? word : word.toLowerCase()) && Math.random() < chance) {
+			try {
 				await msg.reply(message);
 				timestamp(`Responded to ${msg.author.username}`);
-				return;
-			}
-		} else {
-			if (msg.content.toLowerCase().includes(word.toLowerCase()) && Math.random() < chance) {
-				await msg.reply(message);
-				timestamp(`Responded to ${msg.author.username}`);
-				return;
-			}
+			} catch (error) {}
 		}
 	}
 });
