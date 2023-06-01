@@ -85,15 +85,15 @@ client.on(Events.MessageCreate, async msg => {
 		}
 	}
 
-	const ping_str = `<@${client.user.id}>`;
-	if (msg.content.startsWith(ping_str)) {
-		timestamp(`Sent GPT response to ${msg.author.username}`);
-		if (msg.content.length > 700) {
-			await msg.reply("sorry, I'm not reading all that");
-		} else {
-			await msg.reply(await gptResponse(global.config.chatgpt_system_prompt, `(sent by ${client.user.username}) ` + msg.content.slice(ping_str.length).trim()));
-		}
-	}
+	// const ping_str = `<@${client.user.id}>`;
+	// if (msg.content.startsWith(ping_str)) {
+	// 	timestamp(`Sent GPT response to ${msg.author.username}`);
+	// 	if (msg.content.length > 700) {
+	// 		await msg.reply("sorry, I'm not reading all that");
+	// 	} else {
+	// 		await msg.reply(await gptResponse(global.config.chatgpt_system_prompt, `(sent by ${client.user.username}) ` + msg.content.slice(ping_str.length).trim()));
+	// 	}
+	// }
 });
 
 client.login(process.env.DISCORD_TOKEN);
