@@ -93,8 +93,8 @@ client.on(Events.MessageCreate, async msg => {
 		} else {
 			await msg.reply(await gptResponse(
 				global.config.chatgpt_system_prompt,
-				global.config.chatgpt_assistant_prompt,
-				`sent by ${client.user.username}: ` + msg.content.slice(ping_str.length).trim()
+				global.config.chatgpt_assistant_prompt.replace("%s", client.user.username),
+				msg.content.slice(ping_str.length).trim()
 			));
 		}
 	}
