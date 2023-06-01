@@ -30,7 +30,7 @@ client.once(Events.ClientReady, c => {
 
 client.on(Events.MessageCreate, async msg => {
 	for (const { target_id, reactions, responses } of global.config.rules) {
-		if (msg.author.id !== target_id) return;
+		if (msg.author.id !== target_id) continue;
 
 		for (const { emoji_id, chance, word, case_sensitive } of reactions) {
 			if (chance <= 0 || Math.random() > chance) continue;
