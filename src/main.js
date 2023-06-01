@@ -29,9 +29,13 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on(Events.MessageCreate, async msg => {
+	// === User specific rules ===
+
 	for (const { target_id, reactions, responses } of global.config.rules) {
 		if (msg.author.id !== target_id) continue;
 
+		// === Reactions ===
+		
 		for (const { emoji_id, chance, word, case_sensitive } of reactions) {
 			if (chance <= 0 || Math.random() > chance) continue;
 
@@ -45,6 +49,8 @@ client.on(Events.MessageCreate, async msg => {
 			}
 		}
 	
+		// === Responses ===
+
 		for (const { word, chance, message, case_sensitive } of responses) {
 			if (chance <= 0 || Math.random() > chance) continue;
 	
@@ -59,6 +65,8 @@ client.on(Events.MessageCreate, async msg => {
 		}
 	}
 
+	// === Default Reactions ===
+
 	for (const { word, chance, emoji_id, case_sensitive } of global.config.default_rule.reactions) {
 		if (chance <= 0 || Math.random() > chance) continue;
 
@@ -72,6 +80,8 @@ client.on(Events.MessageCreate, async msg => {
 		}
 	}
 
+	// === Default Responses ===
+
 	for (const { word, chance, message, case_sensitive } of global.config.default_rule.responses) {
 		if (chance <= 0 || Math.random() > chance) continue;
 
@@ -84,6 +94,8 @@ client.on(Events.MessageCreate, async msg => {
 			} catch (error) { }
 		}
 	}
+
+	// === Language cortex ===
 
 	// const ping_str = `<@${client.user.id}>`;
 	// if (msg.content.startsWith(ping_str)) {
