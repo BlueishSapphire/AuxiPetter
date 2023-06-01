@@ -89,11 +89,11 @@ client.on(Events.MessageCreate, async msg => {
 	if (msg.content.startsWith(ping_str)) {
 		timestamp(`Sent GPT response to ${msg.author.username}`);
 		if (msg.content.length > 700) {
-			await msg.reply("sorry, I'm not reading all that");
+			await msg.reply("sorry, I'm not reading all that :3");
 		} else {
 			await msg.reply(await gptResponse(
 				global.config.chatgpt_system_prompt,
-				global.config.chatgpt_assistant_prompt.replace("%s", client.user.username),
+				global.config.chatgpt_assistant_prompt.replace("{}", client.user.username),
 				msg.content.slice(ping_str.length).trim()
 			));
 		}
