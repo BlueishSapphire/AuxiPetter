@@ -17,7 +17,8 @@ jobs:
         node-version: [18.x]
 
     env:
-      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }} 
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
