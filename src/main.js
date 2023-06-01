@@ -4,7 +4,7 @@ const { Client, Events, GatewayIntentBits, Partials, DMChannel } = require('disc
 
 const { timestamp } = require("./timestamp.js");
 const { reload_config } = require("./config_manager.js");
-const { gptResponse } = require("./openai.js");
+const { gptResponse } = require("./soul.js");
 
 fs.watchFile("../config.json", reload_config);
 reload_config();
