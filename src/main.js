@@ -85,8 +85,9 @@ client.on(Events.MessageCreate, async msg => {
 		}
 	}
 
-	const ping_str = `<@!${client.user.id}>`;
+	const ping_str = `<@${client.user.id}>`;
 	if (msg.content.startsWith(ping_str)) {
+		timestamp(`Sent GPT response to ${msg.author.username}`);
 		if (msg.content.length > 700) {
 			await msg.reply("sorry, I'm not reading all that");
 		} else {
