@@ -60,7 +60,7 @@ function load_rule(emojis, target_id, reactions, responses) {
 		try {
 			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]", error);
+			timestamp("[config.json]" + error);
 		}
 	}
 
@@ -69,7 +69,7 @@ function load_rule(emojis, target_id, reactions, responses) {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]", error);
+			timestamp("[config.json]" + error);
 		}
 	}
 
@@ -104,7 +104,7 @@ function load_default_rule({ reactions, responses }) {
 		try {
 			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]", error);
+			timestamp("[config.json]" + error);
 		}
 	}
 
@@ -113,7 +113,7 @@ function load_default_rule({ reactions, responses }) {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]", error);
+			timestamp("[config.json]" + error);
 		}
 	}
 
