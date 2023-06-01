@@ -126,7 +126,7 @@ function load_default_rule({ reactions, responses }) {
 function reload_config() {
 	timestamp("Loading config.json");
 
-	const { emojis, rules, default_rule, chatgpt_system_prompt } = require("../config.json");
+	const { emojis, rules, default_rule, chatgpt_system_prompt, chatgpt_assistant_prompt } = require("../config.json");
 
 	if (emojis === undefined) {
 		timestamp("[config.json] Error: emojis should be defined");
@@ -146,6 +146,15 @@ function reload_config() {
 		chatgpt_system_prompt = "";
 	}
 
+	if (chatgpt_assistant_prompt === undefined) {
+		timestamp("[config.json] Error: chatgpt_assistant_prompt should be defined");
+		chatgpt_assistant_prompt = "";
+	}
+	if (typeof(chatgpt_assistant_prompt) !== "string") {
+		timestamp("[config.json] Error: chatgpt_assistant_prompt should be a string");
+		chatgpt_assistant_prompt = "";
+	}
+
 	global.config = {};
 
 	global.config.rules = [];
@@ -155,6 +164,7 @@ function reload_config() {
 
 	global.config.default_rule = load_default_rule(default_rule);
 	global.config.chatgpt_system_prompt = chatgpt_system_prompt;
+	global.config.chatgpt_assistant_prompt = chatgpt_assistant_prompt;
 }
 
 module.exports = { reload_config };

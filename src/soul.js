@@ -6,13 +6,14 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-async function gptResponse(system_prompt, prompt) {
+async function gptResponse(system_prompt, assistant_prompt, prompt) {
 	try {
 		const completion = await openai.createChatCompletion({
 			model: "gpt-3.5-turbo",
 			messages: [
-				{ "role": "system", "content": system_prompt },
-				{ "role": "user",   "content": prompt },
+				{ "role": "system",    "content": system_prompt },
+				{ "role": "assistant", "content": assistant_prompt },
+				{ "role": "user",      "content": prompt },
 			]
 		});
 
