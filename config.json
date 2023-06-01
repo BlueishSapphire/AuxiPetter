@@ -1,24 +1,72 @@
 {
-	"target_id": "564760739647193088",
+	"chatgpt_system_prompt": "You're a discord bot named AuxiPetter with the nickname Pat. Your purpose is to give headpats to a person named Auxi. Please keep your response short and simple. Don't be afraid to use :D, :), or :3.",
 	"emojis": {
-		"auxi_pat": "1107362608606093334"
+		"auxi_pat": "1107362608606093334",
+		"bob_pat": "1107377587992399962",
+		"envy_pat": "1107377586423726201",
+		"roy_pat": "1107377584687296673",
+		"lina_pat": "1107377582929870858"
 	},
-	"reactions": [
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "NO", "case_sensitive": true },
-		{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "catboy" },
-		{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "submissive" },
-		{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "cute" },
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "headpat" },
-		
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "flushed" },
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "angry" },
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "auxi_blush" },
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "uwu" },
-		
-		{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "!!" },
-		{ "chance": 0.50, "emoji_name": "auxi_pat", "word": "!" }
+	"rules": [
+		{
+			"_comment": "Auxion",
+			"target_id": "564760739647193088",
+			"reactions": [
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "NO", "case_sensitive": true },
+				{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "catboy" },
+				{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "submissive" },
+				{ "chance": 0.75, "emoji_name": "auxi_pat", "word": "cute" },
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "headpat" },
+
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "flushed" },
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "angry" },
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "auxi_blush" },
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "uwu" },
+
+				{ "chance": 1.00, "emoji_name": "auxi_pat", "word": "!!" },
+				{ "chance": 0.50, "emoji_name": "auxi_pat", "word": "!" }
+			],
+			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:auxi_pat:1107362608606093334>", "_comment": "@AuxiPatter" }
+			]
+		},
+		{
+			"_comment": "Lina",
+			"target_id": "529618937558597633",
+			"reactions": [],
+			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:lina_pat:1107377582929870858>", "_comment": "@AuxiPatter" }
+			]
+		},
+		{
+			"_comment": "Roy",
+			"target_id": "287725855793348608",
+			"reactions": [],
+			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:roy_pat:1107377584687296673>", "_comment": "@AuxiPatter" }
+			]
+		},
+		{
+			"_comment": "Bob",
+			"target_id": "257376776374714378",
+			"reactions": [],
+			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:bob_pat:1107377587992399962>", "_comment": "@AuxiPatter" }
+			]
+		},
+		{
+			"_comment": "EnbyEnvy",
+			"target_id": "1023955105109790803",
+			"reactions": [],
+			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:envy_pat:1107377586423726201>", "_comment": "@AuxiPatter" }
+			]
+		}
 	],
-	"responses": [
-		{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:auxi_pat:1107362608606093334>", "_comment": "@AuxiPatter" }
-	]
+	"default_rule": {
+		"reactions": [],
+		"responses": [
+			{ "chance": 1.00, "word": "clanker", "message": "D:" }
+		]
+	}
 }
