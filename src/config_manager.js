@@ -1,6 +1,6 @@
 const { timestamp } = require("./timestamp.js");
 
-function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) {
+function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive = false) {
 	if (emoji_name === undefined) throw new Error(`[config.json] Error: emoji_name should be defined`);
 	if (typeof(emoji_name) !== "string") throw new Error(`[config.json] Error: emoji_name should be a string`);
 	if (emojis[emoji_name] === undefined) throw new Error(`[config.json] Error: could not find matching emoji entry for :${emoji_name}:`);
@@ -15,7 +15,7 @@ function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive) 
 	return { emoji_id, chance, word, case_sensitive };
 }
 
-function load_config_response(chance, word, message, case_sensitive) {
+function load_config_response(chance, word, message, case_sensitive = false) {
 	if (chance === undefined) throw new Error(`[config.json] Error: chance should be defined`);
 	if (typeof(chance) !== "number") throw new Error(`[config.json] Error: chance should be a number`);
 	if (word === undefined) throw new Error(`[config.json] Error: word should be defined`);
