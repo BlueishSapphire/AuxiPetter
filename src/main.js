@@ -92,8 +92,8 @@ client.on(Events.MessageCreate, async msg => {
 			await msg.reply("sorry, I'm not reading all that :3");
 		} else {
 			await msg.reply(await gptResponse(
-				global.config.chatgpt_system_prompt.replace("{}", client.user.username),
-				global.config.chatgpt_assistant_prompt.replace("{}", client.user.username),
+				global.config.chatgpt_system_prompt.replace("{}", msg.author.username),
+				global.config.chatgpt_assistant_prompt.replace("{}", msg.author.username),
 				msg.content.slice(ping_str.length).trim()
 			));
 		}
