@@ -28,6 +28,7 @@
 				{ "chance": 0.50, "emoji_name": "auxi_pat", "word": "!" }
 			],
 			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:auxi_pat:1107362608606093334>", "_comment": "@AuxiPatter" }
 			]
 		},
 		{
@@ -35,6 +36,7 @@
 			"target_id": "529618937558597633",
 			"reactions": [],
 			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:lina_pat:1107377582929870858>", "_comment": "@AuxiPatter" }
 			]
 		},
 		{
@@ -42,6 +44,7 @@
 			"target_id": "287725855793348608",
 			"reactions": [],
 			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:roy_pat:1107377584687296673>", "_comment": "@AuxiPatter" }
 			]
 		},
 		{
@@ -49,6 +52,7 @@
 			"target_id": "257376776374714378",
 			"reactions": [],
 			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:bob_pat:1107377587992399962>", "_comment": "@AuxiPatter" }
 			]
 		},
 		{
@@ -56,6 +60,7 @@
 			"target_id": "1023955105109790803",
 			"reactions": [],
 			"responses": [
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:envy_pat:1107377586423726201>", "_comment": "@AuxiPatter" }
 			]
 		}
 	],
