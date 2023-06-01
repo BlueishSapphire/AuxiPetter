@@ -18,7 +18,7 @@ async function gptResponse(system_prompt, prompt) {
 
 		return completion.data.choices[0].message.content;
 	} catch (error) {
-		throw new Error(error.response.data.error);	
+		console.error(error.response.data.error);
 	}
 }
 
