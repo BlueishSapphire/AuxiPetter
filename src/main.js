@@ -97,19 +97,21 @@ client.on(Events.MessageCreate, async msg => {
 
 	// === Language cortex ===
 
-	// const ping_str = `<@${client.user.id}>`;
-	// if (msg.content.startsWith(ping_str)) {
-	// 	timestamp(`Sent GPT response to ${msg.author.username}`);
-	// 	if (msg.content.length > 700) {
-	// 		await msg.reply("sorry, I'm not reading all that :3");
-	// 	} else {
-	// 		await msg.reply(await gptResponse(
-	// 			global.config.chatgpt_system_prompt.replace("{}", msg.author.username),
-	// 			global.config.chatgpt_assistant_prompt.replace("{}", msg.author.username),
-	// 			msg.content.slice(ping_str.length).trim()
-	// 		));
-	// 	}
-	// }
+	if (global.config.chatgpt.enabled) {
+		const ping_str = `<@${client.user.id}>`;
+		if (msg.content.startsWith(ping_str)) {
+			timestamp(`Sent GPT response to ${msg.author.username}`);
+			if (msg.content.length > 700) {
+				await msg.reply("sorry, I'm not reading all that :3");
+			} else {
+				await msg.reply(await gptResponse(
+					global.config.chatgpt.system_prompt.replace("{}", msg.author.username),
+					global.config.chatgpt.assistant_prompt.replace("{}", msg.author.username),
+					msg.content.slice(ping_str.length).trim()
+				));
+			}
+		}
+	}
 });
 
 client.login(process.env.DISCORD_TOKEN);

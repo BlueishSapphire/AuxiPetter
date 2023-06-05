@@ -123,10 +123,45 @@ function load_default_rule({ reactions, responses }) {
 	};
 }
 
+function load_chatgpt({ enabled, system_prompt, assistant_prompt }) {
+	if (enabled === undefined) {
+		timestamp("[config.json] Error: enabled should be defined");
+		enabled = false;
+	}
+	if (typeof(enabled) !== "boolean") {
+		timestamp("[config.json] Error: enabled should be a boolean");
+		enabled = false;
+	}
+
+	if (system_prompt === undefined) {
+		timestamp("[config.json] Error: system_prompt should be defined");
+		system_prompt = "";
+	}
+	if (typeof(system_prompt) !== "string") {
+		timestamp("[config.json] Error: system_prompt should be a string");
+		system_prompt = "";
+	}
+
+	if (assistant_prompt === undefined) {
+		timestamp("[config.json] Error: assistant_prompt should be defined");
+		assistant_prompt = "";
+	}
+	if (typeof(assistant_prompt) !== "string") {
+		timestamp("[config.json] Error: assistant_prompt should be a string");
+		assistant_prompt = "";
+	}
+
+	return {
+		enabled,
+		system_prompt,
+		assistant_prompt,
+	};
+}
+
 function reload_config() {
 	timestamp("Loading config.json");
 
-	const { emojis, rules, default_rule, chatgpt_system_prompt, chatgpt_assistant_prompt } = require("../config.json");
+	const { emojis, rules, default_rule, chatgpt } = require("../config.json");
 
 	if (emojis === undefined) {
 		timestamp("[config.json] Error: emojis should be defined");
@@ -137,24 +172,6 @@ function reload_config() {
 		emojis = [];
 	}
 
-	if (chatgpt_system_prompt === undefined) {
-		timestamp("[config.json] Error: chatgpt_system_prompt should be defined");
-		chatgpt_system_prompt = "";
-	}
-	if (typeof(chatgpt_system_prompt) !== "string") {
-		timestamp("[config.json] Error: chatgpt_system_prompt should be a string");
-		chatgpt_system_prompt = "";
-	}
-
-	if (chatgpt_assistant_prompt === undefined) {
-		timestamp("[config.json] Error: chatgpt_assistant_prompt should be defined");
-		chatgpt_assistant_prompt = "";
-	}
-	if (typeof(chatgpt_assistant_prompt) !== "string") {
-		timestamp("[config.json] Error: chatgpt_assistant_prompt should be a string");
-		chatgpt_assistant_prompt = "";
-	}
-
 	global.config = {};
 
 	global.config.rules = [];
@@ -163,8 +180,7 @@ function reload_config() {
 	}
 
 	global.config.default_rule = load_default_rule(default_rule);
-	global.config.chatgpt_system_prompt = chatgpt_system_prompt;
-	global.config.chatgpt_assistant_prompt = chatgpt_assistant_prompt;
+	global.config.chatgpt = load_chatgpt(chatgpt);
 }
 
 module.exports = { reload_config };
