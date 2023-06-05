@@ -1,14 +1,64 @@
+const fs = require("fs");
 const { timestamp } = require("./timestamp.js");
 
+
+
+function config_error(msg) {
+	timestamp(`[config.json] Error: ${msg}`);
+}
+
+function assert_msg(val, msg) {
+	if (val === undefined) throw new Error(msg);
+}
+
+function _assert_type(obj, type) {
+	assert_defined(obj);
+	if (typeof(Object.values(obj)[0]) !== type) {
+		throw new Error(`${Object.keys(obj)[0]} should be a ${type}`);
+	}
+}
+
+function assert_defined(obj) {
+	if (Object.values(obj)[0] === undefined) {
+		throw new Error(`${Object.keys(obj)[0]} should be defined`);
+	}
+}
+
+function assert_string(obj) {
+	_assert_type(obj, "string");
+}
+
+function assert_array(obj) {
+	_assert_type(obj, "object");
+}
+
+function assert_number(obj) {
+	_assert_type(obj, "number");
+}
+
+function assert_boolean(obj) {
+	_assert_type(obj, "boolean");
+}
+
+function assert_default(assert_func, obj, default_value) {
+	try {
+		assert_func(obj);
+		return Object.values(obj)[0];
+	} catch (error) {
+		config_error(error);
+		return default_value;
+	}
+}
+
+
+
 function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive = false) {
-	if (emoji_name === undefined) throw new Error(`[config.json] Error: emoji_name should be defined`);
-	if (typeof(emoji_name) !== "string") throw new Error(`[config.json] Error: emoji_name should be a string`);
-	if (emojis[emoji_name] === undefined) throw new Error(`[config.json] Error: could not find matching emoji entry for :${emoji_name}:`);
-	if (chance === undefined) throw new Error(`[config.json] Error: chance should be defined`);
-	if (typeof(chance) !== "number") throw new Error(`[config.json] Error: chance should be a number`);
-	if (word === undefined) throw new Error(`[config.json] Error: word should be defined`);
-	if (typeof(word) !== "string") throw new Error(`[config.json] Error: word should be a string`);
-	if (typeof(case_sensitive) != "boolean") throw new Error(`[config.json] Error: case_sensitive should be a boolean`);
+	assert_string({emoji_name});
+	assert_number({chance});
+	assert_string({word});
+	assert_boolean({case_sensitive});
+
+	assert_msg(emojis[emoji_name], `Could not find matching emoji entry for :${emoji_name}:`);
 
 	let emoji_id = emojis[emoji_name];
 
@@ -16,51 +66,25 @@ function load_config_reaction(emojis, emoji_name, chance, word, case_sensitive =
 }
 
 function load_config_response(chance, word, message, case_sensitive = false) {
-	if (chance === undefined) throw new Error(`[config.json] Error: chance should be defined`);
-	if (typeof(chance) !== "number") throw new Error(`[config.json] Error: chance should be a number`);
-	if (word === undefined) throw new Error(`[config.json] Error: word should be defined`);
-	if (typeof(word) !== "string") throw new Error(`[config.json] Error: word should be a string`);
-	if (message === undefined) throw new Error(`[config.json] Error: message should be defined`);
-	if (typeof(message) !== "string") throw new Error(`[config.json] Error: message should be a string`);
-	if (typeof(case_sensitive) != "boolean") throw new Error(`[config.json] Error: case_sensitive should be a boolean`);
+	assert_number({chance});
+	assert_string({word});
+	assert_string({message});
+	assert_boolean({case_sensitive});
 
 	return { chance, word, message, case_sensitive };
 }
 
 function load_rule(emojis, target_id, reactions, responses) {
-	if (target_id === undefined) {
-		timestamp("[config.json] Error: target_id should be defined");
-		target_id = "";
-	}
-	if (typeof(target_id) !== "string") {
-		timestamp("[config.json] Error: target_id should be a string");
-		target_id = "";
-	}
-
-	if (reactions === undefined) {
-		timestamp("[config.json] Error: reactions should be defined");
-		reactions = [];
-	}
-	if (typeof(reactions) !== "object") {
-		timestamp("[config.json] Error: reactions should be an array");
-		reactions = [];
-	}
-
-	if (responses === undefined) {
-		timestamp("[config.json] Error: responses should be defined");
-		responses = [];
-	}
-	if (typeof(responses) !== "object") {
-		timestamp("[config.json] Error: responses should be an array");
-		responses = [];
-	}
+	assert_string({target_id});
+	assert_array({reactions});
+	assert_array({responses});
 
 	const reaction_results = [];
 	for (const { emoji_name, chance, word, case_sensitive } of reactions) {
 		try {
 			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]" + error);
+			config_error(error);
 		}
 	}
 
@@ -69,7 +93,7 @@ function load_rule(emojis, target_id, reactions, responses) {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]" + error);
+			config_error(error);
 		}
 	}
 
@@ -81,30 +105,15 @@ function load_rule(emojis, target_id, reactions, responses) {
 }
 
 function load_default_rule({ reactions, responses }) {
-	if (reactions === undefined) {
-		timestamp("[config.json] Error: reactions should be defined");
-		reactions = [];
-	}
-	if (typeof(reactions) !== "object") {
-		timestamp("[config.json] Error: reactions should be an array");
-		reactions = [];
-	}
-
-	if (responses === undefined) {
-		timestamp("[config.json] Error: responses should be defined");
-		responses = [];
-	}
-	if (typeof(responses) !== "object") {
-		timestamp("[config.json] Error: responses should be an array");
-		responses = [];
-	}
+	reactions = assert_default(assert_array, { reactions }, []);
+	responses = assert_default(assert_array, { responses }, []);
 
 	const reaction_results = [];
 	for (const { emoji_name, chance, word, case_sensitive = false } of reactions) {
 		try {
 			reaction_results.push(load_config_reaction(emojis, emoji_name, chance, word, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]" + error);
+			config_error(error);
 		}
 	}
 
@@ -113,7 +122,7 @@ function load_default_rule({ reactions, responses }) {
 		try {
 			response_results.push(load_config_response(chance, word, message, case_sensitive));
 		} catch (error) {
-			timestamp("[config.json]" + error);
+			config_error(error);
 		}
 	}
 
@@ -124,32 +133,9 @@ function load_default_rule({ reactions, responses }) {
 }
 
 function load_chatgpt({ enabled, system_prompt, assistant_prompt }) {
-	if (enabled === undefined) {
-		timestamp("[config.json] Error: enabled should be defined");
-		enabled = false;
-	}
-	if (typeof(enabled) !== "boolean") {
-		timestamp("[config.json] Error: enabled should be a boolean");
-		enabled = false;
-	}
-
-	if (system_prompt === undefined) {
-		timestamp("[config.json] Error: system_prompt should be defined");
-		system_prompt = "";
-	}
-	if (typeof(system_prompt) !== "string") {
-		timestamp("[config.json] Error: system_prompt should be a string");
-		system_prompt = "";
-	}
-
-	if (assistant_prompt === undefined) {
-		timestamp("[config.json] Error: assistant_prompt should be defined");
-		assistant_prompt = "";
-	}
-	if (typeof(assistant_prompt) !== "string") {
-		timestamp("[config.json] Error: assistant_prompt should be a string");
-		assistant_prompt = "";
-	}
+	enabled = assert_default(assert_boolean, { enabled }, false);
+	system_prompt = assert_default(assert_string, { system_prompt }, "");
+	assistant_prompt = assert_default(assert_string, { assistant_prompt }, "");
 
 	return {
 		enabled,
@@ -158,19 +144,24 @@ function load_chatgpt({ enabled, system_prompt, assistant_prompt }) {
 	};
 }
 
+function load_config_file(path) {
+	try {
+		let config = JSON.parse(fs.readFileSync(path));
+		config._success = true;
+		return config;
+	} catch (error) {
+		config_error(error);
+		return { _success: false };
+	}
+}
+
 function reload_config() {
 	timestamp("Loading config.json");
 
-	const { emojis, rules, default_rule, chatgpt } = require("../config.json");
+	let { _success, emojis, rules, default_rule, chatgpt } = load_config_file("./config.json");
+	if (!_success) return;
 
-	if (emojis === undefined) {
-		timestamp("[config.json] Error: emojis should be defined");
-		emojis = [];
-	}
-	if (typeof(emojis) !== "object") {
-		timestamp("[config.json] Error: emojis should be an array");
-		emojis = [];
-	}
+	emojis = assert_default(assert_array, { emojis }, []);
 
 	global.config = {};
 
