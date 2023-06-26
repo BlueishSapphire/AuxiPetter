@@ -88,6 +88,7 @@ client.on(Events.MessageCreate, async msg => {
 		const content = case_sensitive ? msg.content : msg.content.toLowerCase();
 
 		if (content.includes(case_sensitive ? word : word.toLowerCase())) {
+			msg.channel.sendTyping();
 			try {
 				await msg.reply(message);
 				timestamp(`Responded to ${msg.author.username}`);
@@ -101,6 +102,7 @@ client.on(Events.MessageCreate, async msg => {
 		const ping_str = `<@${client.user.id}>`;
 		if (msg.content.startsWith(ping_str)) {
 			timestamp(`Sent GPT response to ${msg.author.username}`);
+			msg.channel.sendTyping();
 			if (msg.content.length > 700) {
 				await msg.reply("sorry, I'm not reading all that :3");
 			} else {
