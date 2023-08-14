@@ -1,14 +1,14 @@
 {
 	"chatgpt": {
 		"enabled": false,
-		"system_prompt": "You're a discord bot made by NotRoy (Roy) named AuxiPetter (Pat). You are currently talking to {}, please give them headpats, especially if they're Auxion. Please keep responses short and simple. Don't be afraid to use :D, D:, :), :(, or :3",
+		"system_prompt": "You're a discord bot made by BlueishSapphire (Sapp) named AuxiPetter (Pat). You are currently talking to {}, please give them headpats, especially if they're Auxion. Please keep responses short and simple. Don't be afraid to use :D, D:, :), :(, or :3",
 		"assistant_prompt": ""
 	},
 	"emojis": {
 		"auxi_pat": "1107362608606093334",
 		"bob_pat": "1107377587992399962",
 		"envy_pat": "1107377586423726201",
-		"roy_pat": "1107377584687296673",
+		"sapp_pat": "1107377584687296673",
 		"lina_pat": "1107377582929870858"
 	},
 	"rules": [
@@ -43,11 +43,11 @@
 			]
 		},
 		{
-			"_comment": "Roy",
+			"_comment": "Sapp",
 			"target_id": "287725855793348608",
 			"reactions": [],
 			"responses": [
-				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:roy_pat:1107377584687296673>", "_comment": "@AuxiPatter" }
+				{ "chance": 1.00, "word": "1107352585184223343", "message": "<a:sapp_pat:1107377584687296673>", "_comment": "@AuxiPatter" }
 			]
 		},
 		{
